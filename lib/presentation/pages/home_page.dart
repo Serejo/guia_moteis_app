@@ -29,6 +29,19 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: const HomeHeader(),
       backgroundColor: Colors.red,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.map_outlined,
+          color: Colors.red,
+        ),
+        label: const Text(
+          'Mapa',
+          style: TextStyle(color: Colors.red),
+        ),
+        backgroundColor: Colors.grey[200],
+      ),
       body: Container(
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -80,9 +93,11 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 final motel = provider.motels[index];
                 return MotelCard(
-                  name: motel.bairro,
+                  name: motel.fantasia,
                   price: motel.media,
                   imageUrl: motel.logo,
+                  location: motel.bairro,
+                  logoUrl: motel.logo,
                 );
               },
             ),

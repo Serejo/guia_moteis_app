@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guia_moteis_app/presentation/widgets/carrossel_home.dart';
+import 'package:guia_moteis_app/presentation/widgets/filter_widget.dart';
 import 'package:guia_moteis_app/presentation/widgets/home_header.dart';
 import 'package:provider/provider.dart';
 import '../../providers/motel_provider.dart';
@@ -53,10 +54,24 @@ class _HomePageState extends State<HomePage> {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: Colors.grey[200]!,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30.0),
+          topRight: Radius.circular(30.0),
+        ),
+      ),
       child: Column(
         children: [
           const SizedBox(height: 16),
-          SizedBox(height: 250, child: CarrosselHome()),
+          SizedBox(
+            height: 230,
+            child: CarrosselHome(),
+          ),
+          const SizedBox(height: 16),
+          FilterWidget(
+            filters: provider.filters,
+          ),
           const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(

@@ -39,111 +39,125 @@ class _CarrosselHomeState extends State<CarrosselHome> {
       children: [
         Container(
           height: 200,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: PageView.builder(
             controller: _pageController,
             itemCount: motels.length,
             itemBuilder: (context, index) {
               return Row(
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: Image.network(
-                      motels[index].suites.first.fotos.first,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: Image.network(
+                        motels[index].suites.first.fotos.first,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity - 16,
+                      ),
                     ),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            Column(
-                              children: [
-                                Icon(
-                                  Icons.whatshot,
-                                  color: Colors.red,
-                                  size: 16,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  motels[index].fantasia,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.whatshot,
+                                    color: Colors.red,
+                                    size: 16,
                                   ),
-                                ),
-                                Text(
-                                  motels[index].bairro,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                  ),
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  (motels[index].suites.first.periodos.first.desconto.toString() == null
-                                          ? motels[index].suites.first.periodos.first.desconto.toString()
-                                          : "30%") +
-                                      " de desconto",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                                SizedBox(height: 2),
-                                Text(
-                                  "a partir de " + "R\$" + motels[index].suites.first.periodos.first.valor.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
+                                  SizedBox(height: 40),
+                                ],
                               ),
-                            ),
-                            child: Container(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
+                              SizedBox(width: 5),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "reservar",
+                                    motels[index].fantasia,
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    motels[index].bairro,
+                                    style: TextStyle(
+                                      fontSize: 10,
                                     ),
                                   ),
                                   SizedBox(width: 4),
-                                  Icon(
-                                    Icons.chevron_right,
-                                    color: Colors.white,
+                                  Text(
+                                    (motels[index].suites.first.periodos.first.desconto.toString() == null
+                                            ? motels[index].suites.first.periodos.first.desconto.toString()
+                                            : "30%") +
+                                        " de desconto",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                  SizedBox(height: 2),
+                                  Text(
+                                    "a partir de " + "R\$" + motels[index].suites.first.periodos.first.valor.toString(),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
                                   ),
                                 ],
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: TextButton(
+                              onPressed: () {},
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                              child: Container(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "reservar",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(width: 4),
+                                    Icon(
+                                      Icons.chevron_right,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],

@@ -19,10 +19,20 @@ class Periodo {
     return Periodo(
       tempoFormatado: json['tempoFormatado'],
       tempo: json['tempo'],
-      valor: (json['valor'] as num).toDouble(),
-      valorTotal: (json['valorTotal'] as num).toDouble(),
+      valor: _getDoubleFromJson(json['valor']),
+      valorTotal: _getDoubleFromJson(json['valorTotal']),
       temCortesia: json['temCortesia'],
-      desconto: json['desconto'] != null ? (json['desconto'] as num).toDouble() : null,
+      desconto: json['desconto'] != null ? _getDoubleFromJson(json['desconto']) : null,
     );
+  }
+
+  static double _getDoubleFromJson(dynamic value) {
+    if (value is num) {
+      return value.toDouble();
+    } else if (value is String) {
+      return double.tryParse(value) ?? 0.0;
+    } else {
+      return 0.0;
+    }
   }
 }

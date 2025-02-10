@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:guia_moteis_app/data/models/motel.dart';
+import 'package:guia_moteis_app/data/models/motel_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiClient {
@@ -7,13 +7,24 @@ class ApiClient {
   final String baseUrl2 = 'https://www.npoint.io/docs/e728bb91e0cd56cc0711';
 
   Future<List<Motel>> fetchMotels() async {
-    final response = await http.get(Uri.parse(baseUrl1));
+    try {
+      final response = await http.get(Uri.parse(baseUrl1));
+      print(response);
 
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      return data.map((json) => Motel.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load motels');
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+
+        if (responseData['sucesso'] == true) {
+          final List<dynamic> moteisJson = responseData['data']['moteis'] ?? [];
+          return moteisJson.map((json) => Motel.fromJson(json)).toList();
+        } else {
+          throw Exception('Erro no JSON: ${responseData['mensagem']}');
+        }
+      } else {
+        throw Exception('Falha ao carregar dados: Status ${response.statusCode}');
+      }
+    } catch (e) {
+      return [];
     }
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/api_client.dart';
-import '../data/models/motel.dart';
+import '../data/models/motel_model.dart';
 
 class MotelProvider extends ChangeNotifier {
   List<Motel> _motels = [];
@@ -19,6 +19,7 @@ class MotelProvider extends ChangeNotifier {
       notifyListeners();
 
       _motels = await _apiClient.fetchMotels();
+
       _errorMessage = null;
     } catch (e) {
       _errorMessage = 'Erro ao carregar motéis';

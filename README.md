@@ -2,6 +2,9 @@
 
 Este projeto Flutter foi criado como parte de um teste para uma vaga na Guia de Motéis Go
 
+![image](https://github.com/user-attachments/assets/48c4074a-722e-42e3-a5f6-52764c4db9ac)
+
+
 ## Descrição do Projeto
 
 O guia_moteis_app é uma aplicação Flutter desenvolvida para listar e detalhar motéis. O projeto utiliza diversas bibliotecas e segue uma estrutura e design system específicos.

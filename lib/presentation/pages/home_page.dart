@@ -88,16 +88,11 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.all(8),
               itemCount: provider.motels.length,
               itemBuilder: (context, index) {
                 final motel = provider.motels[index];
                 return MotelCard(
-                  name: motel.fantasia,
-                  price: motel.media,
-                  imageUrl: motel.logo,
-                  location: motel.bairro,
-                  logoUrl: motel.logo,
+                  motel: motel,
                 );
               },
             ),

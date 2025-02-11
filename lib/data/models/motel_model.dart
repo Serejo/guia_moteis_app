@@ -2,9 +2,9 @@ import 'package:guia_moteis_app/data/models/suite_model.dart';
 
 class Motel {
   final String fantasia;
-  final String logo;
+  final String? logo;
   final String bairro;
-  final double distancia;
+  final double? distancia;
   final int qtdFavoritos;
   final double media;
   final int qtdAvaliacoes;
@@ -24,13 +24,13 @@ class Motel {
   factory Motel.fromJson(Map<String, dynamic> json) {
     return Motel(
       fantasia: json['fantasia'],
-      logo: json['logo'],
-      bairro: json['bairro'],
-      distancia: (json['distancia'] as num).toDouble(),
-      qtdFavoritos: json['qtdFavoritos'],
-      media: (json['media'] as num).toDouble(),
-      qtdAvaliacoes: json['qtdAvaliacoes'],
-      suites: (json['suites'] as List<dynamic>).map((suite) => Suite.fromJson(suite)).toList(),
+      logo: json['logo'] ?? '',
+      bairro: json['bairro'] ?? '',
+      distancia: (json['distancia'] as num?)?.toDouble() ?? 0.0,
+      qtdFavoritos: (json['qtdFavoritos'] as num?)?.toInt() ?? 0,
+      media: (json['media'] as num?)?.toDouble() ?? 0.0,
+      qtdAvaliacoes: (json['qtdAvaliacoes'] as num?)?.toInt() ?? 0,
+      suites: (json['suites'] as List<dynamic>?)?.map((suite) => Suite.fromJson(suite)).toList() ?? [],
     );
   }
 }

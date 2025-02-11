@@ -35,8 +35,10 @@ class MotelProvider extends ChangeNotifier {
 
       _motels = await _apiClient.fetchMotels();
       _errorMessage = null;
-    } catch (e) {
-      _errorMessage = 'Erro ao carregar motéis';
+    } catch (e, stackTrace) {
+      _errorMessage = 'Erro ao carregar motéis: $e';
+      debugPrint('Exception in loadMotels: $e');
+      debugPrint('Stack trace: $stackTrace');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -44,7 +46,7 @@ class MotelProvider extends ChangeNotifier {
   }
 
   void toggleFilter(int index) {
-    if (index == 0) return; // Ignora o primeiro filtro fixo
+    if (index == 0) return;
 
     if (_selectedFilterIndices.contains(index)) {
       _selectedFilterIndices.remove(index);

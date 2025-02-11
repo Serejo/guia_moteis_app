@@ -10,7 +10,9 @@ class MotelCardHeader extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          backgroundImage: NetworkImage(motel.logo),
+          backgroundImage: motel.logo != null && motel.logo!.isNotEmpty
+              ? NetworkImage(motel.logo!)
+              : AssetImage('assets/images/default_logo.png') as ImageProvider,
           radius: 30,
         ),
         const SizedBox(width: 12),

@@ -43,14 +43,15 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.grey[200],
       ),
       body: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              topRight: Radius.circular(30.0),
-            ),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
           ),
-          child: _buildBody(motelProvider)),
+        ),
+        child: _buildBody(motelProvider),
+      ),
     );
   }
 
@@ -65,40 +66,67 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: BoxDecoration(
-        color: Colors.grey[200]!,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30.0),
-          topRight: Radius.circular(30.0),
-        ),
-      ),
-      child: Column(
-        children: [
-          const SizedBox(height: 16),
-          SizedBox(
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: SizedBox(
             height: 230,
             child: CarrosselHome(),
           ),
-          const SizedBox(height: 16),
-          FilterWidget(
-            filters: provider.filters,
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: ListView.builder(
-              itemCount: provider.motels.length,
-              itemBuilder: (context, index) {
-                final motel = provider.motels[index];
-                return MotelCard(
-                  motel: motel,
-                );
-              },
+        ),
+        SliverPersistentHeader(
+          pinned: true,
+          delegate: _SliverAppBarDelegate(
+            minHeight: 60.0,
+            maxHeight: 60.0,
+            child: Container(
+              color: Colors.white,
+              child: FilterWidget(
+                filters: provider.filters,
+              ),
             ),
           ),
-        ],
-      ),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              final motel = provider.motels[index];
+              return MotelCard(
+                motel: motel,
+              );
+            },
+            childCount: provider.motels.length,
+          ),
+        ),
+      ],
     );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  @override
+  double get minExtent => minHeight;
+
+  @override
+  double get maxExtent => maxHeight;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight || minHeight != oldDelegate.minHeight || child != oldDelegate.child;
   }
 }

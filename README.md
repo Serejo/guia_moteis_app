@@ -2,6 +2,8 @@
 
 Este projeto Flutter foi criado como parte de um teste para uma vaga na Guia de Motéis Go
 
+Link do vídeo explicativo: [Vídeo](https://drive.google.com/file/d/1alUB3qIHX5IFUVhk0wik0grXQY3GlUeq/view?usp=sharing)
+
 ![image](https://github.com/user-attachments/assets/48c4074a-722e-42e3-a5f6-52764c4db9ac)
 
 
